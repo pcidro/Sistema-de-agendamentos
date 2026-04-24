@@ -1,0 +1,28 @@
+import ClientInput from "./ClientInput";
+import DatePicker from "./DatePicker";
+import TimeSlot from "./TimeSlot";
+
+const SchedulingForm = () => {
+  return (
+    <div className="mt-5 w-full max-w-xl mx-auto px-4 py-2">
+      <h1 className="text-3xl font-bold mb-2 text-zinc-100">
+        Agende um atendimento
+      </h1>
+      <p className="text-zinc-400 mb-8">
+        Selecione data e a hora desejados e informe o nome do cliente
+      </p>
+
+      <DatePicker />
+
+      <TimeSlot />
+
+      <ClientInput />
+
+      <button className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold uppercase py-3 px-4 rounded-lg transition-all duration-200 cursor-pointer shadow-lg shadow-purple-500/20 active:scale-[0.98]">
+        Agendar
+      </button>
+    </div>
+  );
+};
+
+export default SchedulingForm;
