@@ -1,4 +1,9 @@
 import { TIME_SLOTS } from "../../utils/TimeSlots";
+interface iPropsTimeSlot {
+  selectedDate: string | null;
+  selectedHour: string | null;
+  setSelectedHour: React.Dispatch<React.SetStateAction<string | null>>;
+}
 
 const sections = [
   { title: "Manhã", data: TIME_SLOTS.morning },
@@ -6,7 +11,11 @@ const sections = [
   { title: "Noite", data: TIME_SLOTS.evening },
 ];
 
-const TimeSlot = () => {
+const TimeSlot = ({
+  selectedDate,
+  selectedHour,
+  setSelectedHour,
+}: iPropsTimeSlot) => {
   return (
     <div className="mb-8">
       <h2 className="text-xl font-semibold text-zinc-200 mb-4">

@@ -1,6 +1,11 @@
 import { DatePickerLimit } from "../../utils/DatePickerLimit";
 
-const DatePicker = () => {
+interface IPropsDatePicker {
+  value: string | null;
+  onChange: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+const DatePicker = ({ value, onChange }: IPropsDatePicker) => {
   const { min, max } = DatePickerLimit();
 
   return (
