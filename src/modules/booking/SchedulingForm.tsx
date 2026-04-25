@@ -1,3 +1,4 @@
+import Appointments from "../../context/AppointmentsContext";
 import useScheduling from "../../hooks/useScheduling";
 import ClientInput from "./ClientInput";
 import DatePicker from "./DatePicker";
@@ -15,6 +16,14 @@ const SchedulingForm = () => {
     reset,
     isValid,
   } = useScheduling();
+
+  const { bookAppointment } = Appointments();
+
+  function handleSubmit() {
+    const newAppointment = buildAppointment();
+    bookAppointment(newAppointment);
+    reset();
+  }
 
   return (
     <div className="mt-5 w-full max-w-xl mx-auto px-4 py-2">
@@ -36,6 +45,7 @@ const SchedulingForm = () => {
       <ClientInput value={clientName} onChange={setClientName} />
 
       <button
+        onClick={handleSubmit}
         disabled={!isValid}
         className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold uppercase py-3 px-4 rounded-lg transition-all duration-200 cursor-pointer shadow-lg shadow-purple-500/20 active:scale-[0.98] disabled:bg-gray-400
 disabled:cursor-not-allowed

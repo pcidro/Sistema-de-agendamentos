@@ -1,7 +1,16 @@
-import AgendaDateSelector from "./AgendaDateSelector";
-import AgendaPeriodSelection from "./AgendaPeriodSelection";
+import useAgenda from "../../hooks/useAgenda";
+import ScheduleDateSelector from "./ScheduleDateSelector";
+import SchedulePeriodSection from "./SchedulePeriodSection";
 
 const SchedulePanel = () => {
+  const {
+    eveningAppointments,
+    morningAppointments,
+    agendaDate,
+    setAgendaDate,
+    afternoonAppointments,
+  } = useAgenda();
+
   return (
     <div className="py-2">
       <div className="relative flex flex-col md:flex-row md:items-start justify-between mb-8 gap-4">
@@ -11,10 +20,17 @@ const SchedulePanel = () => {
             Consulte os seus cortes de cabelo agendados
           </p>
         </div>
-        <AgendaDateSelector />
+        <ScheduleDateSelector
+          agendaDate={agendaDate}
+          onChange={setAgendaDate}
+        />
       </div>
 
-      <AgendaPeriodSelection />
+      <SchedulePeriodSection
+        morningAppointments={morningAppointments}
+        eveningAppointments={eveningAppointments}
+        afternoonAppointments={afternoonAppointments}
+      />
     </div>
   );
 };

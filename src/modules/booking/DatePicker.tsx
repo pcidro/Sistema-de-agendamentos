@@ -15,6 +15,8 @@ const DatePicker = ({ value, onChange }: IPropsDatePicker) => {
         <input
           type="date"
           className=" input-date-custom border bg-zinc-800 border-zinc-700  text-zinc-100 p-3 rounded-lg outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
+          value={value ?? ""}
+          onChange={(e) => onChange(e.target.value)}
           min={min}
           max={max}
         />

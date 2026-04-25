@@ -1,6 +1,14 @@
 import { DatePickerLimit } from "../../utils/DatePickerLimit";
 
-const AgendaDateSelector = () => {
+interface iScheduleDateSelector {
+  agendaDate: string | null;
+  onChange: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+const ScheduleDateSelector = ({
+  agendaDate,
+  onChange,
+}: iScheduleDateSelector) => {
   const { min, max } = DatePickerLimit();
 
   return (
@@ -8,6 +16,8 @@ const AgendaDateSelector = () => {
       <div className="relative w-fit">
         <input
           type="date"
+          value={agendaDate ?? ""}
+          onChange={(e) => onChange(e.target.value)}
           min={min}
           max={max}
           className="bg-zinc-900 border border-purple-500/50 text-zinc-100 p-2 lg:p-3 rounded-lg outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all appearance-none cursor-pointer text-sm"
@@ -20,4 +30,4 @@ const AgendaDateSelector = () => {
   );
 };
 
-export default AgendaDateSelector;
+export default ScheduleDateSelector;
