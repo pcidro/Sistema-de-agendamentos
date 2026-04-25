@@ -1,8 +1,11 @@
 import { useState } from "react";
 import Appointments from "../context/AppointmentsContext";
+import TransformDataToDateInputValue from "../utils/TransformDataToString";
 
 const useAgenda = () => {
-  const [agendaDate, setAgendaDate] = useState<string | null>(null);
+  const [agendaDate, setAgendaDate] = useState<string | null>(
+    TransformDataToDateInputValue(new Date()),
+  );
   const { appointments } = Appointments();
 
   const morningAppointments = appointments.filter(

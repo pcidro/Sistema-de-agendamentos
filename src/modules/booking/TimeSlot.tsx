@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import { TIME_SLOTS } from "../../utils/TimeSlots";
+import isTimeSlotPast from "../../utils/isTimeSlotPast";
+
 interface iPropsTimeSlot {
   selectedDate: string | null;
   selectedHour: string | null;
@@ -16,6 +19,17 @@ const TimeSlot = ({
   selectedHour,
   setSelectedHour,
 }: iPropsTimeSlot) => {
+  useEffect(() => {
+    if (!selectedDate || !selectedHour) return;
+    const [year, month, day] = selectedDate.split("-").map(Number);
+    const date = new Date(year, month - 1, day);
+    const isPast = isTimeSlotPast(date, selectedHour);
+
+    if (isPast) {
+      setSelectedHour(null);
+    }
+  }, [selectedDate, selectedHour, setSelectedHour]);
+
   return (
     <div className="mb-8">
       <h2 className="text-xl font-semibold text-zinc-200 mb-4">
@@ -30,9 +44,18 @@ const TimeSlot = ({
             <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
               {section.data.map((time) => {
                 const isSelected = selectedHour === time;
+                let isPast = false;
+                if (selectedDate) {
+                  const [year, month, day] = selectedDate
+                    .split("-")
+                    .map(Number);
+                  const date = new Date(year, month - 1, day);
 
+                  isPast = isTimeSlotPast(date, time);
+                }
                 return (
                   <button
+                    disabled={isPast}
                     key={time}
                     onClick={() => setSelectedHour(time)}
                     type="button"
@@ -43,6 +66,7 @@ const TimeSlot = ({
             ? "bg-purple-600 border-purple-400 text-white"
             : "bg-zinc-800/50 border-zinc-700 text-zinc-300 hover:border-purple-500 hover:text-purple-400 hover:bg-zinc-800"
         }
+        ${isPast ? "opacity-50 cursor-not-allowed" : ""}
       `}
                   >
                     {time}

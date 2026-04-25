@@ -3,6 +3,7 @@ import type { Appointment } from "../types";
 
 interface iAppointmentContext {
   bookAppointment: (appointment: Appointment) => void;
+  removeAppointment: (appointment: string) => void;
   appointments: Appointment[];
 }
 
@@ -26,6 +27,13 @@ export const AppointmentsProvider = ({ children }: PropsWithChildren) => {
     localStorage.setItem("@appointment", JSON.stringify(appointments));
   }, [appointments]);
 
+  function removeAppointment(appointmentRemove: string) {
+    const remove = appointments.filter(
+      (appointment) => appointment.id !== appointmentRemove,
+    );
+    setAppointment(remove);
+  }
+
   function bookAppointment(newAppointment: Appointment) {
     setAppointment((prev) => [...prev, newAppointment]);
   }
@@ -35,6 +43,7 @@ export const AppointmentsProvider = ({ children }: PropsWithChildren) => {
       value={{
         appointments,
         bookAppointment,
+        removeAppointment,
       }}
     >
       {children}
