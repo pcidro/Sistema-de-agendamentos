@@ -1,73 +1,91 @@
-# React + TypeScript + Vite
+# 💈 Barber Schedule
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Acesse o projeto online:
+👉 https://barbersschedule.netlify.app/
 
-Currently, two official plugins are available:
+O **Barber Schedule** é um sistema de agendamento para barbearias desenvolvido para oferecer uma experiência simples e intuitiva tanto para o barbeiro quanto para o cliente. O sistema permite organizar atendimentos por períodos e garante a integridade dos dados através de diversas regras de negócio.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Sobre o projeto
 
-## React Compiler
+O projeto foca na gestão de horários, permitindo selecionar data, horário e nome do cliente. Os agendamentos são organizados automaticamente entre **Manhã, Tarde e Noite**, sendo exibidos em tempo real na interface.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tecnologias utilizadas
 
-## Expanding the ESLint configuration
+O projeto foi construído utilizando as melhores práticas do ecossistema React:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React** (Biblioteca principal)
+- **TypeScript** (Tipagem estática para maior segurança)
+- **Tailwind CSS** (Estilização moderna e responsiva)
+- **Context API** (Gerenciamento de estado global)
+- **Custom Hooks** (Encapsulamento de lógica de negócio)
+- **LocalStorage** (Persistência de dados no navegador)
+- **React Hot Toast** (Feedbacks visuais dinâmicos)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ⚙️ Funcionalidades
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Seleção de data:** Calendário interativo para agendamentos.
+- **Gestão de horários:** Seleção apenas de horários disponíveis.
+- **Identificação:** Cadastro rápido do nome do cliente.
+- **Dashboard em tempo real:** Listagem imediata após o agendamento.
+- **Organização por períodos:** Filtros automáticos para Manhã, Tarde e Noite.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Regras de Negócio e Validações
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Para garantir a consistência do sistema, foram implementadas as seguintes travas:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Impedimento de agendamentos em horários que já passaram.
+- Bloqueio de horários já ocupados por outros clientes.
+- Impossibilidade de agendamentos retroativos (datas passadas).
+- Limite de agendamento fixado em no máximo 10 dias no futuro.
+- Atualização dinâmica da lista de horários conforme a disponibilidade.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Validação de Formulário:
+
+O sistema monitora o estado de envio (`submitted`) e valida obrigatoriedade dos campos (data, horário e nome). O botão de ação é desabilitado em caso de inconsistência, e o usuário recebe feedback visual via `toast.success` ao finalizar.
+
+## Hooks Personalizados:
+
+useScheduling: Gerencia o formulário, valida dados e cria o objeto de agendamento com o período correto.
+
+useAgenda: Responsável por filtrar e organizar os dados que serão exibidos na tela conforme a data selecionada.
+
+## Arquitetura e Organização
+
+A estrutura de pastas foi pensada para escalabilidade e separação de responsabilidades:
+
+src/
+├── components/ # Componentes de UI reutilizáveis
+├── modules/ # Módulos principais (Booking e Schedule)
+├── context/ # Gerenciamento de estado (Appointments Context)
+├── hooks/ # Lógica extraída (useScheduling, useAgenda)
+├── utils/ # Funções auxiliares e formatadores
+└── types/ # Definições de interfaces TypeScript
+
+## Como rodar o projeto
+
+Clone o repositório.
+
+Instale as dependências:
+
+npm install
+Inicie o servidor de desenvolvimento:
+
+npm run dev
+
+## Aprendizados
+
+Durante o desenvolvimento deste projeto, foram consolidados importantes conceitos:
+
+Gerenciamento de estado com Context API
+Criação e uso de Custom Hooks para separar lógica de negócio
+Organização de código em arquitetura modular
+Manipulação de datas e tratamento de timezone no JavaScript
+Implementação de validação de formulários e controle de erros
+Aplicação de regras de negócio no frontend
+Construção de interfaces responsivas com Tailwind CSS
+
+## Possíveis melhorias futuras
+
+Autenticação de usuários (Login/Senha).
+
+Integração com backend e banco de dados real (PostgreSQL/Node.js).
