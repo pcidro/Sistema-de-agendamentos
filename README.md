@@ -49,17 +49,6 @@ useScheduling: Gerencia o formulário, valida dados e cria o objeto de agendamen
 
 useAgenda: Responsável por filtrar e organizar os dados que serão exibidos na tela conforme a data selecionada.
 
-## Arquitetura e Organização
-
-A estrutura de pastas foi pensada para escalabilidade e separação de responsabilidades:
-
-src/
-├── components/ # Componentes de UI reutilizáveis
-├── modules/ # Módulos principais (Booking e Schedule)
-├── context/ # Gerenciamento de estado (Appointments Context)
-├── hooks/ # Lógica extraída (useScheduling, useAgenda)
-├── utils/ # Funções auxiliares e formatadores
-└── types/ # Definições de interfaces TypeScript
 
 ## Como rodar o projeto
 
