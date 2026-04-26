@@ -13,15 +13,15 @@ O projeto foca na gestão de horários, permitindo selecionar data, horário e n
 
 O projeto foi construído utilizando as melhores práticas do ecossistema React:
 
-- **React** (Biblioteca principal)
-- **TypeScript** (Tipagem estática para maior segurança)
-- **Tailwind CSS** (Estilização moderna e responsiva)
-- **Context API** (Gerenciamento de estado global)
-- **Custom Hooks** (Encapsulamento de lógica de negócio)
-- **LocalStorage** (Persistência de dados no navegador)
-- **React Hot Toast** (Feedbacks visuais dinâmicos)
+- **React** 
+- **TypeScript** 
+- **Tailwind CSS** 
+- **Context API** 
+- **Custom Hooks** 
+- **LocalStorage** 
+- **React Hot Toast** 
 
-## ⚙️ Funcionalidades
+## Funcionalidades
 
 - **Seleção de data:** Calendário interativo para agendamentos.
 - **Gestão de horários:** Seleção apenas de horários disponíveis.
