@@ -3,9 +3,10 @@ import { DatePickerLimit } from "../../utils/DatePickerLimit";
 interface IPropsDatePicker {
   value: string | null;
   onChange: React.Dispatch<React.SetStateAction<string | null>>;
+  error: string | undefined;
 }
 
-const DatePicker = ({ value, onChange }: IPropsDatePicker) => {
+const DatePicker = ({ value, onChange, error }: IPropsDatePicker) => {
   const { min, max } = DatePickerLimit();
 
   return (
@@ -24,6 +25,7 @@ const DatePicker = ({ value, onChange }: IPropsDatePicker) => {
           ▼
         </span>
       </div>
+      {error && <span className="text-red-400 text-sm mt-1">{error}</span>}
     </div>
   );
 };

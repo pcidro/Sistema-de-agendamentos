@@ -1,9 +1,10 @@
 interface iPropsClienteInput {
   value: string;
   onChange: React.Dispatch<React.SetStateAction<string>>;
+  error: string | undefined;
 }
 
-const ClientInput = ({ value, onChange }: iPropsClienteInput) => {
+const ClientInput = ({ value, onChange, error }: iPropsClienteInput) => {
   return (
     <div className="mb-8 flex flex-col">
       <label
@@ -20,6 +21,7 @@ const ClientInput = ({ value, onChange }: iPropsClienteInput) => {
         type="text"
         placeholder="Digite o nome do cliente"
       />
+      {error && <span className="text-red-400 text-sm mt-1">{error}</span>}
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import { toast } from "react-hot-toast";
 import Appointments from "../../context/AppointmentsContext";
 import useScheduling from "../../hooks/useScheduling";
 import ClientInput from "./ClientInput";
@@ -15,13 +16,19 @@ const SchedulingForm = () => {
     buildAppointment,
     reset,
     isValid,
+    submitted,
+    setSubmitted,
   } = useScheduling();
 
   const { bookAppointment } = Appointments();
 
   function handleSubmit() {
+    setSubmitted(true);
+    if (!isValid) return;
+
     const newAppointment = buildAppointment();
     bookAppointment(newAppointment);
+    toast.success("Agendamento realizado!");
     reset();
   }
 
@@ -34,22 +41,32 @@ const SchedulingForm = () => {
         Selecione data e a hora desejados e informe o nome do cliente
       </p>
 
-      <DatePicker value={dateSelected} onChange={setDateSelected} />
+      <DatePicker
+        value={dateSelected}
+        onChange={setDateSelected}
+        error={submitted && !dateSelected ? "Selecione uma data" : undefined}
+      />
 
       <TimeSlot
         selectedDate={dateSelected}
         selectedHour={hourSelected}
         setSelectedHour={setHourSelected}
+        error={submitted && !hourSelected ? "Selecione um horário" : undefined}
       />
 
-      <ClientInput value={clientName} onChange={setClientName} />
+      <ClientInput
+        value={clientName}
+        onChange={setClientName}
+        error={submitted && !clientName ? "Informe um nome" : undefined}
+      />
 
       <button
         onClick={handleSubmit}
-        disabled={!isValid}
-        className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold uppercase py-3 px-4 rounded-lg transition-all duration-200 cursor-pointer shadow-lg shadow-purple-500/20 active:scale-[0.98] disabled:bg-gray-400
-disabled:cursor-not-allowed
-disabled:opacity-70"
+        className={`w-full text-white font-bold uppercase py-3 px-4 rounded-lg transition-all duration-200 shadow-lg active:scale-[0.98] ${
+          !isValid
+            ? "bg-gray-400 cursor-not-allowed opacity-70"
+            : "bg-purple-600 hover:bg-purple-700 cursor-pointer shadow-purple-500/20"
+        }`}
       >
         Agendar
       </button>

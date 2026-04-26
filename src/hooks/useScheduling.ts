@@ -6,6 +6,7 @@ const useScheduling = () => {
   const [clientName, setClientName] = useState("");
   const [hourSelected, setHourSelected] = useState<string | null>(null);
   const [dateSelected, setDateSelected] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
 
   function getPeriod(hourSelected: string): Period {
     if (TIME_SLOTS.morning.includes(hourSelected)) {
@@ -27,6 +28,7 @@ const useScheduling = () => {
     setClientName("");
     setHourSelected(null);
     setDateSelected(null);
+    setSubmitted(false);
   }
 
   function buildAppointment() {
@@ -50,6 +52,8 @@ const useScheduling = () => {
     setDateSelected,
     isValid,
     reset,
+    submitted,
+    setSubmitted,
   };
 };
 
